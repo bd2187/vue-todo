@@ -4,8 +4,22 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>vue todo</title>
+        <style>
+            .completedTodo {
+                text-decoration: line-through;
+            }
+        </style>
     </head>
     <body>
+        <div id="app">
+            <ul>
+                <todo
+                    v-for="todo in todos"
+                    v-bind:todo="todo"
+                    v-bind:key="todo.id"
+                ></todo>
+            </ul>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="./app.js"></script>
     </body>

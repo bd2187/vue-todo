@@ -1,8 +1,10 @@
 Vue.component("todo", {
     props: ["todo"],
     template: `
-        <li>
-            <p v-bind:class="{completedTodo: !todo.active}">{{ todo.message }}</p>
+        <li class="todo-item">
+            <p v-bind:class="{completedTodo: !todo.active}" v-on:click="$emit('toggle', todo.id)">
+                {{ todo.message }}
+            </p>
             <button v-on:click="$emit('delete-todo', todo.id)">Delete</button>
         </li>
     `,
@@ -76,6 +78,22 @@ var app = new Vue({
                         ...this.todos.slice(i + 1, this.todos.length),
                     ];
 
+                    break;
+                }
+            }
+        },
+
+        /**
+         * Toggles active property for todo
+         * @param id
+         * @return
+         */
+        toggleActiveProperty: function (id) {
+            for (let i = 0; i < this.todos.length; i++) {
+                var todo = this.todos[i];
+
+                if (todo.id === parseInt(id)) {
+                    todo.active = !todo.active;
                     break;
                 }
             }

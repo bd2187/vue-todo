@@ -2,7 +2,7 @@ Vue.component("todo", {
     props: ["todo"],
     template: `
         <li class="todo-item">
-            <p v-bind:class="{completedTodo: !todo.active}" v-on:click="$emit('toggle', todo.id)">
+            <p v-bind:class="{todoText: true, completedTodo: !todo.active}" v-on:click="$emit('toggle', todo.id)">
                 {{ todo.message }}
             </p>
             <button v-on:click="$emit('delete-todo', todo.id)">Delete</button>
@@ -49,6 +49,15 @@ var app = new Vue({
 
     methods: {
         /**
+         * Resets value of newTodo
+         * @param
+         * @return
+         */
+        resetnewTodo: function () {
+            this.newTodo = "";
+        },
+
+        /**
          * Adds todo to todos array if valid
          * @param Object evt
          * @return
@@ -60,6 +69,7 @@ var app = new Vue({
             if (isTodoValid) {
                 var newTodo = this.createNewTodo(this.newTodo);
                 this.todos = [newTodo, ...this.todos];
+                this.resetnewTodo();
             }
         },
 

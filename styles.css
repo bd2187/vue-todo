@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    font-family: helvetica;
+}
+
+.todo-list {
+    margin: 0;
+    padding: 0;
+}
+
+.todo-item {
+    list-style-type: none;
+}
+
+.completedTodo {
+    text-decoration: line-through;
+}

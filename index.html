@@ -4,11 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>vue todo</title>
-        <style>
-            .completedTodo {
-                text-decoration: line-through;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="./reset.css" />
+        <link rel="stylesheet" type="text/css" href="./styles.css" />
     </head>
     <body>
         <div id="app">
@@ -16,12 +13,13 @@
                 <input type="text" v-model="newTodo" placeholder="new todo" />
                 <button>Add</button>
             </form>
-            <ul>
+            <ul class="todo-list">
                 <todo
                     v-for="todo in todos"
                     v-bind:todo="todo"
                     v-bind:key="todo.id"
                     v-on:delete-todo="deleteTodo"
+                    v-on:toggle="toggleActiveProperty"
                 ></todo>
             </ul>
         </div>

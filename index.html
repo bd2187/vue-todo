@@ -12,6 +12,10 @@
     </head>
     <body>
         <div id="app">
+            <form v-on:submit="addTodo">
+                <input type="text" v-model="newTodo" placeholder="new todo" />
+                <button>Add</button>
+            </form>
             <ul>
                 <todo
                     v-for="todo in todos"

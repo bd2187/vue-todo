@@ -3,7 +3,7 @@ Vue.component("todo", {
     template: `
         <li>
             <p v-bind:class="{completedTodo: !todo.active}">{{ todo.message }}</p>
-            <button>Delete</button>
+            <button v-on:click="$emit('delete-todo', todo.id)">Delete</button>
         </li>
     `,
 });
@@ -58,6 +58,26 @@ var app = new Vue({
             if (isTodoValid) {
                 var newTodo = this.createNewTodo(this.newTodo);
                 this.todos = [newTodo, ...this.todos];
+            }
+        },
+
+        /**
+         * Deletes todo from todos array
+         * @param Number id
+         * @return
+         */
+        deleteTodo: function (id) {
+            for (let i = 0; i < this.todos.length; i++) {
+                var todo = this.todos[i];
+
+                if (todo.id === parseInt(id)) {
+                    this.todos = [
+                        ...this.todos.slice(0, i),
+                        ...this.todos.slice(i + 1, this.todos.length),
+                    ];
+
+                    break;
+                }
             }
         },
     },

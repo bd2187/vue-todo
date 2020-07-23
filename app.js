@@ -12,6 +12,11 @@ var app = new Vue({
     el: "#app",
     data: {
         newTodo: "",
+        todo: {
+            id: 0,
+            message: "",
+            active: true,
+        },
         todos: [
             { id: 1, message: "wash car", active: true },
             { id: 2, message: "canyon drive", active: false },
@@ -25,6 +30,19 @@ var app = new Vue({
         validateNewTodo: function (todo) {
             return todo.trim() !== "" ? true : false;
         },
+
+        /**
+         * Generates ID for todo.
+         * Note: (This can potentially create duplicate IDs. Check if ID exists in arr)
+         * @param String todo
+         * @return Object
+         */
+        createNewTodo: function (todo) {
+            var id = Math.floor(Math.random() * 10) * 123456789;
+            var newTodo = { ...this.todo, id, message: todo };
+
+            return newTodo;
+        },
     },
 
     methods: {
@@ -36,7 +54,11 @@ var app = new Vue({
         addTodo: function (evt) {
             evt.preventDefault();
             var isTodoValid = this.validateNewTodo(this.newTodo);
-            console.warn(isTodoValid);
+
+            if (isTodoValid) {
+                var newTodo = this.createNewTodo(this.newTodo);
+                this.todos = [newTodo, ...this.todos];
+            }
         },
     },
 });
